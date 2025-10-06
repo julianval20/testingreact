@@ -23,12 +23,14 @@ classDiagram
     class Musical {
         +tocar(): void
         +afinar(): void
-        +add(m: Musical): void
-        +remove(m: Musical): void
-        +getChildren(): List~Musical~
+        +add(m: Musical)
+        +remove(m: Musical)
+        +getChildren(): List
         +getNombre(): String
     }
-    class Musical <<abstract>>
+    note right of Musical
+      <<abstract>> (clase abstracta)
+    end note
 
     class Instrumento {
         -nombre: String
@@ -40,13 +42,13 @@ classDiagram
 
     class GrupoMusical {
         -nombre: String
-        -hijos: List~Musical~
+        -hijos: List
         +GrupoMusical(nombre: String)
         +tocar(): void
         +afinar(): void
-        +add(m: Musical): void
-        +remove(m: Musical): void
-        +getChildren(): List~Musical~
+        +add(m: Musical)
+        +remove(m: Musical)
+        +getChildren(): List
         +getNombre(): String
     }
 
@@ -68,13 +70,14 @@ classDiagram
     GrupoMusical <|-- Cuerdas
     GrupoMusical <|-- Vientos
 
-    %% Agregación
+    %% Agregación (GrupoMusical contiene Musical)
     GrupoMusical o-- "0..*" Musical : hijos
 
-    %% Asociaciones entre grupos
-    Percusion -- Cuerdas : relacionada
-    Percusion -- Vientos : relacionada
-    Cuerdas -- Vientos : relacionada
+    %% Relaciones entre Percusion, Cuerdas y Vientos
+    Percusion -- Cuerdas
+    Percusion -- Vientos
+    Cuerdas -- Vientos
+
 
 ```
 

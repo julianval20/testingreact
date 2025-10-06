@@ -20,7 +20,7 @@ Copia el bloque siguiente directamente en tu `README.md` o en cualquier archivo 
 
 ```mermaid
 classDiagram
-    class Musical <<abstract>> {
+    class Musical {
         +tocar(): void
         +afinar(): void
         +add(m: Musical): void
@@ -28,6 +28,7 @@ classDiagram
         +getChildren(): List~Musical~
         +getNombre(): String
     }
+    class Musical <<abstract>>
 
     class Instrumento {
         -nombre: String
@@ -49,18 +50,16 @@ classDiagram
         +getNombre(): String
     }
 
-    class Percusion {
-        +Percusion()
-        %% Constructor: crea instrumentos de percusión: Batería, Congas, Bongós
-    }
-    class Cuerdas {
-        +Cuerdas()
-        %% Constructor: crea instrumentos de cuerdas: Guitarra, Violín, Arpa
-    }
-    class Vientos {
-        +Vientos()
-        %% Constructor: crea instrumentos de viento: Flauta, Saxofón, Trompeta
-    }
+    class Percusion
+    class Cuerdas
+    class Vientos
+
+    Percusion : +Percusion()
+    Percusion : "Constructor crea: Batería, Congas, Bongós"
+    Cuerdas : +Cuerdas()
+    Cuerdas : "Constructor crea: Guitarra, Violín, Arpa"
+    Vientos : +Vientos()
+    Vientos : "Constructor crea: Flauta, Saxofón, Trompeta"
 
     %% Herencias
     Musical <|-- Instrumento
@@ -69,13 +68,14 @@ classDiagram
     GrupoMusical <|-- Cuerdas
     GrupoMusical <|-- Vientos
 
-    %% Agregación: GrupoMusical agrega (contiene) 0..* Musical
+    %% Agregación
     GrupoMusical o-- "0..*" Musical : hijos
 
-    %% Asociaciones entre Percusion, Cuerdas y Vientos
+    %% Asociaciones entre grupos
     Percusion -- Cuerdas : relacionada
     Percusion -- Vientos : relacionada
     Cuerdas -- Vientos : relacionada
+
 ```
 
 ---
